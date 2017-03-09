@@ -1,5 +1,5 @@
 ## Hire me! ##
-link: TBD
+link: https://melofunkcodes.github.io/hire-me/
 
 Cover letters can be boring and not that interesting to read, so I thought what better way to show you I'm eligible for the job than by writing you a cover letter via creating a React website? :) 
 
