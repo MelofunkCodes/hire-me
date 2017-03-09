@@ -71,7 +71,7 @@ const Burst = React.createClass({
         duration:     [ 500, 1300 ],
         isForce3d:    true
       }
-    });//duration used to be [500, 700]
+    });
   }
 });
 
@@ -125,18 +125,6 @@ class Melinda extends React.Component {
 
 	render(){
 
-		// //original
-		// let options = {
-	 //      sectionClassName:     'section',
-	 //      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy', 'test'],
-	 //      scrollBar:            false,
-	 //      navigation:           true,
-	 //      verticalAlign:        false,
-	 //      sectionPaddingTop:    '50px',
-	 //      sectionPaddingBottom: '50px',
-	 //      arrowNavigation:      true
-  //   	};
-
 		let options = {
 	      sectionClassName:     'section',
 	      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy'],
@@ -144,7 +132,7 @@ class Melinda extends React.Component {
 	      navigation:           true,
 	      verticalAlign:        true,
 	      arrowNavigation:      true
-    	}; //hello #429b3d
+    	}; 
 
 		return(
 			<div className="hire-me">
