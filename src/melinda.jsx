@@ -6,10 +6,6 @@ import {SectionsContainer, Section, Header, Footer} from 'react-fullpage';
 Problems I need to solve:
 1. mo.js animation buggy. isPlay not changing back to FALSE, so once the button is pressed, whenever I scroll to different sections, animation still plays (isPlay === true)
 
-2. View of fullpage. the more sections that are added, when I scroll down to them, the later sections aren't full shown.
-
-3. 3 experience boxes aren't flexing in row direction like I want. 
-
 */
 
 
@@ -49,7 +45,7 @@ const Burst = React.createClass({
   
   shouldComponentUpdate () {
     this.props.isPlay && this._burst.replay();
-    return false;
+    return false; //ideally, this should set isPlay === false. Where is this "false" being sent to??
   },
   
   componentDidMount () {
@@ -117,9 +113,7 @@ class Melinda extends React.Component {
   		this.setState({ isPlay: false }); 
   	}
 
-	handleClick(event){
-		// console.log("Button being clicked!");
-		// console.log(event);
+	handleClick(event){ //this is for my Jokes button
 		
 		this.setState({
 			humour: randomCornyJokes()
@@ -131,16 +125,26 @@ class Melinda extends React.Component {
 
 	render(){
 
+		// //original
+		// let options = {
+	 //      sectionClassName:     'section',
+	 //      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy', 'test'],
+	 //      scrollBar:            false,
+	 //      navigation:           true,
+	 //      verticalAlign:        false,
+	 //      sectionPaddingTop:    '50px',
+	 //      sectionPaddingBottom: '50px',
+	 //      arrowNavigation:      true
+  //   	};
+
 		let options = {
 	      sectionClassName:     'section',
-	      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy', 'test'],
+	      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy'],
 	      scrollBar:            false,
 	      navigation:           true,
-	      verticalAlign:        false,
-	      sectionPaddingTop:    '50px',
-	      sectionPaddingBottom: '50px',
+	      verticalAlign:        true,
 	      arrowNavigation:      true
-    	};
+    	}; //hello #429b3d
 
 		return(
 			<div className="hire-me">
@@ -151,7 +155,6 @@ class Melinda extends React.Component {
 		          <a href="#languages">Languages</a>
 		          <a href="#humour">Humour</a>
 		          <a href="#energy">Energy</a>
-		          <a href="#test">Test</a>
 		        </Header>
 		        <Footer>
 		          <a href="https://melofunkcodes.github.io/" target="_blank">My Website</a>
@@ -159,14 +162,14 @@ class Melinda extends React.Component {
 		          <a href="https://www.linkedin.com/in/melinda-yeoh" target="_blank">LinkedIn</a>
 		        </Footer>
 		        <SectionsContainer className="container" {...options}>
-		          <Section className="custom-section" verticalAlign="true" color="#AD1457">
+		          <Section className="hello" color="#22a248">
 		          	<h1> Hiya, Leadweb!</h1>
 		          </Section>
-		          <Section className="custom-section" verticalAlign="true" color="#69D2E7">
-		          	<h1> Here's why You Should Hire Melinda...</h1>
+		          <Section className="why" color="#f2f4f5">
+		          	<h1> Here's Why You Should Hire Melinda...</h1>
 		          </Section>
-		          <Section color="#A7DBD8">
-		          	<h2>Experience</h2>
+		          <Section className="experience" color="#3CCE89">
+		          	<h2>EXPERIENCE</h2>
 	          		<div className="expContainer">
 						<div className="col-medium-3 skill">
 							<h3>Front-End</h3>
@@ -182,9 +185,9 @@ class Melinda extends React.Component {
 						</div>
 					</div>
 		          </Section>
-		          <Section color="#E0E4CC">
+		          <Section className="languages" color="#22313b">
 		          	<div>
-						<h2>Languages</h2>
+						<h2>LANGUAGES</h2>
 						{this.state.languages.map(
 							(eachLang, index) => {
 								return (
@@ -194,7 +197,7 @@ class Melinda extends React.Component {
 						}
 					</div>
 		          </Section>
-		          <Section color="#A7DBD8">
+		          <Section className="jokes" color="#3CCE89">
 		          	<div>
 						<h2>I Tell Jokes!</h2>
 						{this.state.humour}
@@ -202,23 +205,10 @@ class Melinda extends React.Component {
 						<button onClick={this.handleClick}>Tell me another joke!</button>
 					</div>
 		          </Section>
-		          <Section color="#E0E4CC">
-		          	<h2>Energy</h2>
-		          	<br />
-              		<br />
-              		<p>Hello, can you see me?</p>
-					<button onClick={this._play}>Play</button>
+		          <Section className="energy" color="#f2f4f5">
+		          	<h2>ENERGY</h2>
+					<button onClick={this._play}>Pew pew!</button>
               		<Burst isPlay={this.state.isPlay} onComplete={this._resetPlay}/>
-
-              		<br />
-              		<br />
-              		<p>Hello, can you see me?</p>
-		          </Section>
-		           <Section color="#A7DBD8">
-		          	<div>
-						<h2>Test</h2>
-						<p>Hello, can you see me?</p>
-					</div>
 		          </Section>
 		        </SectionsContainer>
 			</div>
