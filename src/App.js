@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Melinda from './melinda';
+// import FullPage from './fullpage';
 
 
 class App extends Component {

@@ -1,5 +1,6 @@
 import React from 'react';
 import mojs from 'mo-js';
+import {SectionsContainer, Section, Header, Footer} from 'react-fullpage';
 
 
 function randomCornyJokes(){
@@ -21,7 +22,7 @@ function randomCornyJokes(){
 			return (
 				`Q: Why did the chef kill himself? \n
 				A: Because he lost the huile d'olive!`);
-		case 5:
+		default:
 			return (
 				`To understand what recursion is, you must first understand recursion.`);
 
@@ -111,13 +112,17 @@ const Burst = React.createClass({
       radius:   { 4: 200 },
       angle:    45,
       count:    12,
+      left:     '25%',
+      top:       '75%',
       isShowEnd: false,
       timeline() {
-        onComplete: ()=> { this.props.onComplete && this.props.onComplete(); }
+        onComplete: ()=> { 
+        	console.log("onComplete was called");
+        	return this.props.onComplete && this.props.onComplete(); }
       },
       children: {
-        radius:       10,
-        fill:         '#E91E63',
+        radius:       20,
+        fill:         { '#D50000' : 'yellow' },
         scale:        { 1: 0, easing: 'sin.in' },
         pathScale:    [ .7, null ],
         degreeShift:  [ 13, null ],
@@ -147,7 +152,7 @@ class Melinda extends React.Component {
 			videoGames: ["Mario Kart", "Final Fantasy", "Killer Instinct"],
 			boardGames: "all the gamesssss",
 			energy: 10000,
-			isPlay: true
+			isPlay: false
 		};
 
 		this.handleClick = this.handleClick.bind(this);
@@ -157,10 +162,12 @@ class Melinda extends React.Component {
 	}
 
 	_play(){ 
+		console.log("_play has been called");
 		this.setState({ isPlay: true }); 
 	}
 
   	_resetPlay(){ 
+  		console.log("resetPlay has been called");
   		this.setState({ isPlay: false }); 
   	}
 
@@ -178,47 +185,96 @@ class Melinda extends React.Component {
 
 	render(){
 
+		let options = {
+	      sectionClassName:     'section',
+	      anchors:              ['hello', 'why', 'experience', 'languages', 'humour', 'energy', 'test'],
+	      scrollBar:            false,
+	      navigation:           true,
+	      verticalAlign:        false,
+	      sectionPaddingTop:    '50px',
+	      sectionPaddingBottom: '50px',
+	      arrowNavigation:      true
+    	};
+
 		return(
 			<div className="hire-me">
-				<h1> Why You Should Hire Melinda...</h1>
-				<div>
-					<h2>Experience</h2>
-					<div>
-						<h3>Front-End</h3>
-						{this.state.experience.frontEnd.map(this.renderSkill)}
+				<Header>
+				  <a href="#hello">Hello</a>
+		          <a href="#why">Why...</a>
+		          <a href="#experience">Experience</a>
+		          <a href="#languages">Languages</a>
+		          <a href="#humour">Humour</a>
+		          <a href="#energy">Energy</a>
+		          <a href="#test">Test</a>
+		        </Header>
+		        <Footer>
+		          <a href="https://melofunkcodes.github.io/" target="_blank">My Website</a>
+		          <a href="https://github.com/MelofunkCodes?tab=repositories" target="_blank">GitHub</a>
+		          <a href="https://www.linkedin.com/in/melinda-yeoh" target="_blank">LinkedIn</a>
+		        </Footer>
+		        <SectionsContainer className="container" {...options}>
+		          <Section className="custom-section" verticalAlign="true" color="#AD1457">
+		          	<h1> Hiya, Leadweb!</h1>
+		          </Section>
+		          <Section className="custom-section" verticalAlign="true" color="#69D2E7">
+		          	<h1> Here's why You Should Hire Melinda...</h1>
+		          </Section>
+		          <Section color="#A7DBD8">
+		          	<h2>Experience</h2>
+	          		<div className="expContainer">
+						<div className="col-medium-3 skill">
+							<h3>Front-End</h3>
+							{this.state.experience.frontEnd.map(this.renderSkill)}
+						</div>
+						<div className="col-medium-3 skill">
+							<h3>Back-End</h3>
+							{this.state.experience.backEnd.map(this.renderSkill)}
+						</div>
+						<div className="col-medium-3 skill">
+							<h3>Tools</h3>
+							{this.state.experience.tools.map(this.renderSkill)}
+						</div>
 					</div>
-					<div>
-						<h3>Back-End</h3>
-						{this.state.experience.backEnd.map(this.renderSkill)}
+		          </Section>
+		          <Section color="#E0E4CC">
+		          	<div>
+						<h2>Languages</h2>
+						{this.state.languages.map(
+							(eachLang, index) => {
+								return (
+									<p key={index}>{eachLang}</p>
+								);
+							})
+						}
 					</div>
-					<div>
-						<h3>Tools</h3>
-						{this.state.experience.tools.map(this.renderSkill)}
+		          </Section>
+		          <Section color="#A7DBD8">
+		          	<div>
+						<h2>I Tell Jokes!</h2>
+						{this.state.humour}
+						<br />
+						<button onClick={this.handleClick}>Tell me another joke!</button>
 					</div>
-				</div>
-				<br />
-				<div>
-					<h2>Languages</h2>
-					{this.state.languages.map(
-						(eachLang, index) => {
-							return (
-								<p key={index}>{eachLang}</p>
-							);
-						})
-					}
-				</div>
-				<br />
-				<div>
-					<h2>Humour</h2>
-					{this.state.humour}
-					<br />
-					<button onClick={this.handleClick}>Tell me another joke!</button>
-				</div>
-				<div className="energy">
-					<h2>Energy</h2>
+		          </Section>
+		          <Section color="#E0E4CC">
+		          	<h2>Energy</h2>
+		          	<br />
+              		<br />
+              		<p>Hello, can you see me?</p>
 					<button onClick={this._play}>Play</button>
               		<Burst isPlay={this.state.isPlay} onComplete={this._resetPlay}/>
-				</div>
+
+              		<br />
+              		<br />
+              		<p>Hello, can you see me?</p>
+		          </Section>
+		           <Section color="#A7DBD8">
+		          	<div>
+						<h2>Test</h2>
+						<p>Hello, can you see me?</p>
+					</div>
+		          </Section>
+		        </SectionsContainer>
 			</div>
 		);
 	}

@@ -2,4 +2,29 @@
   text-align: center;
 }
 
+.skill {
+  border: solid 2px whitesmoke;
+  padding: 0.5em;
+  margin: 0.5em;
+}
 
+.expContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+
+/* ==============================================
+====================MEDIA QUERIES================
+=================================================
+*/
+/* Medium and up screen sizes */
+
+@media only screen and (min-width: 641px) {
+
+  /* This is the class we'd use if we want four elements next to each other */
+  .col-medium-3 {
+      width: 25%;
+  }
+
+}
